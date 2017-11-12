@@ -7,11 +7,19 @@ export default class AttributeList extends Component {
       label: stat,
       value: stats[stat],
       modifier: mods[stats[stat]],
-    }))
+      racialModifier: 0,
+      totalModifier: 0,
+    })),
+    modifiers: this.props.modifiers || [],
   }
 
   render() {
-    const attributes = this.state.attributes.map((attr, i) => <AttributeView key={i} attribute={attr} />);
+    const modifiers = this.state.modifiers;
+    const attributes = this.state.attributes.map((attr, i) => {
+      attr.racialModifier = modifiers[attr.label] || 0;
+      attr.totalModifier = attr.modifier + attr.racialModifier;
+      return <AttributeView key={i} attribute={attr} />
+    });
 
     const headerStyle = {
       padding: '0 10px',
@@ -27,6 +35,8 @@ export default class AttributeList extends Component {
         <span style={headerStyle}>Ability Name</span>
         <span style={headerStyle}>Ability Score</span>
         <span style={headerStyle}>Ability Modifier</span>
+        <span style={headerStyle}>Racial Modifier</span>
+        <span style={headerStyle}>Total Ability Modifier</span>
         {attributes}
       </div>
     );
@@ -36,6 +46,8 @@ export default class AttributeList extends Component {
 
 const abilities = ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'];
 
+// TODO: Should probably return more realistic numbers.
+// Maybe a simplified pick method?
 const mods = [
  -5, // Ignore 0th element
  -5,    // 1

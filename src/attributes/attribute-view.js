@@ -29,6 +29,8 @@ class AttributeView extends Component {
         <span style={labelStyle} className="label">{attribute.label}</span>
         <span style={cellStyle} className="value">{attribute.value}</span>
         <span style={cellStyle} className="value">{attribute.modifier}</span>
+        <span style={cellStyle} className="race">{attribute.racialModifier}</span>
+        <span style={cellStyle} className="total">{attribute.totalModifier}</span>
       </div>
     );
   }
