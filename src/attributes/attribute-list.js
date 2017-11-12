@@ -21,22 +21,29 @@ export default class AttributeList extends Component {
       return <AttributeView key={i} attribute={attr} />
     });
 
+    const rowStyle = {
+      display: 'flex',
+      justifyContent: 'space-evenly',
+    };
+
     const headerStyle = {
       padding: '0 10px',
       margin: '5px',
-      width: '40px',
+      width: '30px',
       display: 'inline-block',
       textAlign: 'center',
-      fontSize: '0.7rem',
+      fontSize: '0.5rem',
     };
 
     return (
       <div>
-        <span style={headerStyle}>Ability Name</span>
-        <span style={headerStyle}>Ability Score</span>
-        <span style={headerStyle}>Ability Modifier</span>
-        <span style={headerStyle}>Racial Modifier</span>
-        <span style={headerStyle}>Total Ability Modifier</span>
+        <div style={rowStyle}>
+          <span style={headerStyle}>Ability Name</span>
+          <span style={headerStyle}>Ability Score</span>
+          <span style={headerStyle}>Ability Modifier</span>
+          <span style={headerStyle}>Racial Modifier</span>
+          <span style={headerStyle}>Total Ability Modifier</span>
+        </div>
         {attributes}
       </div>
     );

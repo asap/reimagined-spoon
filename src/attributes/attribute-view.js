@@ -14,6 +14,11 @@ class AttributeView extends Component {
       textAlign: 'center',
     };
 
+    const rowStyle = {
+      display: 'flex',
+      justifyContent: 'space-evenly',
+    };
+
     const cellStyle = {
       padding: '10px',
       margin: '5px',
@@ -25,7 +30,7 @@ class AttributeView extends Component {
     };
 
     return (
-      <div>
+      <div style={rowStyle}>
         <span style={labelStyle} className="label">{attribute.label}</span>
         <span style={cellStyle} className="value">{attribute.value}</span>
         <span style={cellStyle} className="value">{attribute.modifier}</span>
