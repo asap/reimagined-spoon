@@ -1,4 +1,4 @@
-# d20 GM Tools
+# d20 GM Tools [![Build Status](https://travis-ci.org/asap/reimagined-spoon.svg?branch=master)](https://travis-ci.com/asap/reimagined-spoon)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
