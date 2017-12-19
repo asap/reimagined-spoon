@@ -8,6 +8,7 @@ import logo from './logo.svg';
 import './App.css';
 import CharacterSheet from './character-sheet/character-sheet';
 import NPCView from './npcs/npc-view';
+import RulesSwitcher from './character-sheet/rules-switcher';
 
 class Home extends Component {
   render() {
@@ -19,6 +20,7 @@ class Home extends Component {
 
 class Nav extends Component {
   render() {
+    const system = this.props.system;
 
     const navStyles = {
     };
@@ -36,6 +38,7 @@ class Nav extends Component {
           <li><Link to="/"> Home</Link></li>
           <li><Link to="/sheet">Character Sheet</Link></li>
           <li><Link to="/npc">NPCs</Link></li>
+          <RulesSwitcher system={system} />
         </ul>
         <hr />
       </div>
@@ -44,6 +47,10 @@ class Nav extends Component {
 };
 
 class App extends Component {
+  state = {
+    system: {},
+  }
+
   render() {
     const pageStyles = {
       display: 'flex',
@@ -53,7 +60,7 @@ class App extends Component {
     return (
       <Router>
         <div style={pageStyles}>
-          <Nav />
+          <Nav system={this.state.system} />
           <Route exact path="/" component={Home} />
           <Route path="/sheet" component={CharacterSheet} />
           <Route path="/npc" component={NPCView} />
