@@ -9,11 +9,24 @@ export default class RulesSwitcher extends Component {
       system: {},
       options: [],
     };
+    this.onChange = this.onChange.bind(this);
   }
   onChange(e) {
+    console.log("changing", e.target.value);
     this.setState({
       value: e.target.value
     });
+    this.setState({
+      system: this.state.options
+              .filter( op => op.name === e.target.value)
+    });
+    const thingie = this.state.options
+              .filter( op => op.name === e.target.value);
+    console.log("worked?", thingie);
+    // filter is wrapping this item in an array.
+    // TODO: find a better way of returning the actual
+    // object
+    console.log("changed", this.state.system);
   }
   componentDidMount = () => {
     Seeker.getRules(rules => {
@@ -31,7 +44,7 @@ export default class RulesSwitcher extends Component {
       <div>
         <select
           value={this.state.value}
-          onChange={this.onChange.bind(this)}
+          onChange={this.onChange}
         >
           <option value="select">---</option>
           {options}
