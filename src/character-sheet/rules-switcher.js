@@ -6,31 +6,23 @@ export default class RulesSwitcher extends Component {
     super(props);
     this.state = {
       value: 'select',
-      system: {},
       options: [],
     };
     this.onChange = this.onChange.bind(this);
   }
   onChange(e) {
-    console.log("changing", e.target.value);
+    if (e.target.value === 'select') return false;
+
+    const selectedSystem = this.state.options.find(op => op.name === e.target.value);
+    
     this.setState({
-      value: e.target.value
+      value: e.target.value,
     });
-    this.setState({
-      system: this.state.options
-              .filter( op => op.name === e.target.value)
-    });
-    const thingie = this.state.options
-              .filter( op => op.name === e.target.value);
-    console.log("worked?", thingie);
-    // filter is wrapping this item in an array.
-    // TODO: find a better way of returning the actual
-    // object
-    console.log("changed", this.state.system);
+
+    this.props.updateSystem(selectedSystem);
   }
   componentDidMount = () => {
     Seeker.getRules(rules => {
-      console.log("searching", rules);
       this.setState({
         options: rules
       });
@@ -40,8 +32,15 @@ export default class RulesSwitcher extends Component {
     const options = this.state.options.map((op, i) => {
       return <option key={i} value={op.name}>{op.label}</option>;
     });
+
+    const rulesSwitcherStyles = {
+      display: 'flex',
+      justifyContent: 'center',
+      flexDirection: 'column',
+    };
+
     return (
-      <div>
+      <div style={rulesSwitcherStyles}>
         <select
           value={this.state.value}
           onChange={this.onChange}

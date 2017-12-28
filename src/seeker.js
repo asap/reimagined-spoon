@@ -1,5 +1,16 @@
+// TODO: can we make this act more like request/rest.js?
+// https://hackernoon.com/api-testing-with-jest-d1ab74005c0a
 const getRules = (callback) => {
   return fetch('/api/v1/systems', {
+    accept: "application/json"
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(callback);
+}
+
+const getSpecies = (system, callback) => {
+  return fetch(`/api/v1/species?system=${system}`, {
     accept: "application/json"
   })
     .then(checkStatus)
@@ -24,6 +35,7 @@ const parseJSON = (response) => {
 
 const Seeker = {
   getRules,
+  getSpecies,
 };
 
 export default Seeker;

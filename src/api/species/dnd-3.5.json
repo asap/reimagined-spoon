@@ -1,0 +1,12 @@
+[
+    {
+        "race": "dwarf",
+        "stats": {
+          "CHA": -1,
+          "STR": 1
+        }
+    }, {
+        "race": "human",
+        "stats": {}
+    }
+]

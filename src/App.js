@@ -20,9 +20,8 @@ class Home extends Component {
 
 class Nav extends Component {
   render() {
-    const system = this.props.system;
-
     const navStyles = {
+      flex: 1,
     };
 
     const listStyles = {
@@ -38,32 +37,54 @@ class Nav extends Component {
           <li><Link to="/"> Home</Link></li>
           <li><Link to="/sheet">Character Sheet</Link></li>
           <li><Link to="/npc">NPCs</Link></li>
-          <RulesSwitcher system={system} />
         </ul>
-        <hr />
       </div>
     );
   }
 };
 
 class App extends Component {
-  state = {
-    system: {},
+  constructor(props) {
+    super(props);
+    this.state = {
+      system: {}
+    }
+    this.updateSystem = this.updateSystem.bind(this);
+  }
+
+  updateSystem = (system) => {
+    this.setState({ system });
   }
 
   render() {
+    const system = this.state.system;
+
     const pageStyles = {
       display: 'flex',
       flexDirection: 'column',
       padding: '20px',
     };
+
+    const navStyles = {
+      display: 'flex',
+      justifyContent: 'space-between',
+      borderBottom: '3px solid #369',
+      marginBottom: '20px',
+    };
+
     return (
       <Router>
         <div style={pageStyles}>
-          <Nav system={this.state.system} />
+          <div style={navStyles}>
+            <Nav system={system} />
+            <RulesSwitcher updateSystem={this.updateSystem} />
+          </div>
           <Route exact path="/" component={Home} />
           <Route path="/sheet" component={CharacterSheet} />
-          <Route path="/npc" component={NPCView} />
+          <Route path="/npc" render={(routeProps) => (
+              <NPCView routeProps={routeProps} system={system} />
+            )}
+          />
         </div>
       </Router>
     );

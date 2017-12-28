@@ -24,6 +24,16 @@ app.get('/api/v1/systems', (req, res) => {
   return res.json(systems);
 });
 
+app.get('/api/v1/species', (req, res) => {
+  console.log("something", req.query);
+  try {
+    const species = require(`./api/species/${req.query.system}.json`);
+    return res.json(species);
+  } catch (err) {
+    return res.status(404).send({statusText: "Species does not exist"});
+  }
+});
+
 app.listen(app.get('port'), () => {
   console.log(`Server listing: http://localhost:${app.get("port")}/`); // eslint-disable-line no-console
 });
