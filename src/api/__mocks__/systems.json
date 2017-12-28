@@ -1,0 +1,12 @@
+[
+    {
+        "name": "dnd-3.5",
+        "label": "Dungeons and Dragons",
+        "rules": "3.5"
+    },
+    {
+        "name": "star-trek-decypher",
+        "label": "Star Trek",
+        "rules": "decypher"
+    }
+]
